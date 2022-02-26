@@ -9,16 +9,18 @@ function Book(title, author, pages, progress) {
 }
 
 function addBookToLibrary(title, author, pages, progress) {
-  Library.push(new Book(title, author, pages, progress));
+  const newBook = new Book(title, author, pages, progress);
+  Library.push(newBook);
 
   const card = document.createElement("div");
   card.className = "card";
-  card.textContent = "card";
+  card.setAttribute('style', 'white-space: pre;');
+  for (const key in newBook) {
+    card.textContent += newBook[key] + "\r\n";
+  }
 
   container.appendChild(card);
 }
 
 addBookToLibrary("Harry Potter", "JKR", "200", "45");
 addBookToLibrary("Hobbits", "Madeline", "300", "95");
-
-console.table(Library);
