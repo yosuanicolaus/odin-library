@@ -14,7 +14,7 @@ function addBookToLibrary(title, author, pages, progress) {
 
   const card = document.createElement("div");
   card.className = "card";
-  card.setAttribute('style', 'white-space: pre;');
+  card.setAttribute("style", "white-space: pre;");
   for (const key in newBook) {
     card.textContent += newBook[key] + "\r\n";
   }
@@ -24,3 +24,8 @@ function addBookToLibrary(title, author, pages, progress) {
 
 addBookToLibrary("Harry Potter", "JKR", "200", "45");
 addBookToLibrary("Hobbits", "Madeline", "300", "95");
+
+const newButton = document.getElementById("new");
+newButton.addEventListener("click", () => {
+  //TODO: Implement Form Popup here
+});
