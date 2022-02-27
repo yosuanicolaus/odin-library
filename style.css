@@ -1,10 +1,15 @@
+html,
 body {
   height: 100%;
-  background-color: rgba(128, 128, 128, 0.356);
+}
+
+body {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 1fr 4fr;
-      grid-template-columns: 1fr 4fr;
+  -ms-grid-columns: 1fr 3fr;
+      grid-template-columns: 1fr 3fr;
+  -ms-grid-rows: auto 1fr;
+      grid-template-rows: auto 1fr;
 }
 
 body header {
@@ -13,14 +18,14 @@ body header {
 
 header {
   background-color: #372d32;
-  color: #F9F5F1;
+  color: #f9f5f1;
 }
 
 .sidebar {
-  background-color: #9A7278;
+  background-color: #9a7278;
 }
 
 #container {
-  background-color: #C8B0A8;
+  background-color: #c8b0a8;
 }
 /*# sourceMappingURL=style.css.map */
