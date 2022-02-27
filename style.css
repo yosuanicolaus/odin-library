@@ -17,15 +17,47 @@ body header {
 }
 
 header {
-  background-color: #372d32;
-  color: #f9f5f1;
+  background-color: #2F2E40;
+  color: #FFFBD8;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 0 20px;
 }
 
 .sidebar {
-  background-color: #9a7278;
+  background-color: #6D7661;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-line-pack: start;
+      align-content: flex-start;
+  padding: 20px;
+  gap: 8px;
+}
+
+.sidebar button {
+  margin-top: 20px;
+  grid-column: span 2;
 }
 
 #container {
-  background-color: #c8b0a8;
+  background-color: #78B68E;
+  text-align: center;
+  padding: 20px;
+  display: -ms-grid;
+  display: grid;
+  -ms-flex-line-pack: start;
+      align-content: flex-start;
 }
 /*# sourceMappingURL=style.css.map */

@@ -1,8 +1,8 @@
-$dark: #372d32;
-$pink: #9a7278;
-$white: #f9f5f1;
-$gray: #c8b0a8;
-$red: #9b3d3e;
+$header:     #2F2E40;
+$sidebar:    #6D7661;
+$white:      #FFFBD8;
+$container:  #78B68E;
+$red:        #499290;
 
 html,
 body {
@@ -20,14 +20,36 @@ body {
 }
 
 header {
-  background-color: $dark;
+  background-color: $header;
   color: $white;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
 }
 
 .sidebar {
-  background-color: $pink;
+  background-color: $sidebar;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-content: center;
+  align-content: flex-start ;
+  padding: 20px;
+  gap: 8px;
+
+  button {
+    margin-top: 20px;
+    grid-column: span 2;
+  }
 }
 
 #container {
-  background-color: $gray;
+  background-color: $container;
+  text-align: center;
+  padding: 20px;
+
+  display: grid;
+  align-content: flex-start;
 }
