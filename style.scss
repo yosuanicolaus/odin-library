@@ -1,0 +1,30 @@
+$dark: #372d32;
+$pink: #9A7278;
+$white: #F9F5F1;
+$gray: #C8B0A8;
+$red: #9B3D3E;
+
+body {
+  height: 100%;
+  background-color: rgba(128, 128, 128, 0.356);
+
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+
+  header {
+    grid-column: span 2;
+  }
+}
+
+header {
+  background-color: $dark;
+  color: $white;
+}
+
+.sidebar {
+  background-color: $pink;
+}
+
+#container {
+  background-color: $gray;
+}
