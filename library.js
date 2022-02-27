@@ -12,18 +12,16 @@ function addBookToLibrary(title, author, pages, progress) {
   const newBook = new Book(title, author, pages, progress);
   Library.push(newBook);
 
-  const card = document.createElement("div");
+  const card = container.insertRow();
   card.className = "card";
-  card.setAttribute("style", "white-space: pre;");
   for (const key in newBook) {
-    card.textContent += newBook[key] + "\r\n";
+    const cell = card.insertCell();
+    cell.textContent = newBook[key];
   }
-
-  container.appendChild(card);
 }
 
-addBookToLibrary("Harry Potter", "JKR", "200", "45");
-addBookToLibrary("Hobbits", "Madeline", "300", "95");
+addBookToLibrary("Harry Potter", "JKR", "200", "Completed");
+addBookToLibrary("Hobbits", "Madeline", "300", "Reading");
 
 const newButton = document.getElementById("new");
 newButton.addEventListener("click", () => {
