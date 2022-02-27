@@ -1,15 +1,15 @@
 const container = document.getElementById("container");
 const Library = [];
 
-function Book(title, author, pages, progress) {
+function Book(title, author, pages, status) {
   this.title = title;
   this.author = author;
   this.pages = pages;
-  this.progress = progress;
+  this.status = status;
 }
 
-function addBookToLibrary(title, author, pages, progress) {
-  const newBook = new Book(title, author, pages, progress);
+function addBookToLibrary(title, author, pages, status) {
+  const newBook = new Book(title, author, pages, status);
   Library.push(newBook);
 
   const card = container.insertRow();
@@ -25,5 +25,10 @@ addBookToLibrary("Hobbits", "Madeline", "300", "Reading");
 
 const newButton = document.getElementById("new");
 newButton.addEventListener("click", () => {
-  //TODO: Implement Form Popup here
+  const title = document.getElementById("title").value;
+  const author = document.getElementById("author").value;
+  const pages = document.getElementById("pages").value;
+  const status = document.getElementById("status").value;
+
+  addBookToLibrary(title, author, pages, status);
 });
