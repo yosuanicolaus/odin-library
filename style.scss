@@ -31,6 +31,7 @@ header {
 
 .sidebar {
   background-color: $sidebar;
+  color: $white;
 
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -45,11 +46,39 @@ header {
   }
 }
 
-#container {
+.container {
   background-color: $container;
   text-align: center;
   padding: 20px;
 
   display: grid;
-  align-content: flex-start;
+  align-items: start;
+
+  table {
+    background-color: whitesmoke;
+    table-layout: fixed;
+    width: 100%;
+    border-collapse: collapse;
+    th,td {
+      border: 1px solid rgba(255, 255, 255, 0.534);
+    }
+
+    tr:nth-child(2n - 1) {
+      background-color: #49929071;
+    }
+
+    tr:nth-child(2n) {
+      background-color: #49929049;
+    }
+
+    th {
+      padding: 20px;
+      background-color: #499290;
+      font-size: 1.1rem;
+    }
+
+    td {
+      padding: 10px;
+    }
+  }
 }

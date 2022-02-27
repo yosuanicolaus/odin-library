@@ -33,6 +33,7 @@ header {
 
 .sidebar {
   background-color: #6D7661;
+  color: #FFFBD8;
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: 1fr 1fr;
@@ -51,13 +52,43 @@ header {
   grid-column: span 2;
 }
 
-#container {
+.container {
   background-color: #78B68E;
   text-align: center;
   padding: 20px;
   display: -ms-grid;
   display: grid;
-  -ms-flex-line-pack: start;
-      align-content: flex-start;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: start;
+}
+
+.container table {
+  background-color: whitesmoke;
+  table-layout: fixed;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.container table th, .container table td {
+  border: 1px solid rgba(255, 255, 255, 0.534);
+}
+
+.container table tr:nth-child(2n - 1) {
+  background-color: #49929071;
+}
+
+.container table tr:nth-child(2n) {
+  background-color: #49929049;
+}
+
+.container table th {
+  padding: 20px;
+  background-color: #499290;
+  font-size: 1.1rem;
+}
+
+.container table td {
+  padding: 10px;
 }
 /*# sourceMappingURL=style.css.map */
