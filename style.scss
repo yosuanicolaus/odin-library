@@ -44,6 +44,13 @@ header {
     margin-top: 20px;
     grid-column: span 2;
   }
+
+  .warning {
+    display: none;
+    grid-column: span 2;
+    text-align: center;
+    color: rgb(150, 14, 14);
+  }
 }
 
 .container {

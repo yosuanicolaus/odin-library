@@ -25,10 +25,24 @@ addBookToLibrary("Hobbits", "Madeline", "300", "Reading");
 
 const newButton = document.getElementById("new");
 newButton.addEventListener("click", () => {
-  const title = document.getElementById("title").value;
-  const author = document.getElementById("author").value;
-  const pages = document.getElementById("pages").value;
+  const title  = document.getElementById("title").value;
+  let   author = document.getElementById("author").value;
+  let   pages  = document.getElementById("pages").value;
   const status = document.getElementById("status").value;
 
+  if (title.length == 0) {
+    newButton.nextElementSibling.style.display = "block";
+    return;
+  }
+  newButton.nextElementSibling.style.display = "none";
+
+  if (author.length == 0) {
+    author = "-";
+  }
+  if (pages.length == 0) {
+    pages = "-";
+  }
+
   addBookToLibrary(title, author, pages, status);
+  document.querySelector("form").reset();
 });
