@@ -52,7 +52,7 @@ header {
   grid-column: span 2;
 }
 
-.sidebar .warning {
+.sidebar #warning {
   display: none;
   grid-column: span 2;
   text-align: center;
