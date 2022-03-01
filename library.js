@@ -3,6 +3,8 @@ const newButton = document.getElementById("new");
 const warning = document.getElementById("warning");
 const Library = [];
 
+let editIndex = -1;
+
 function Book(title, author, pages, status) {
   this.title = title;
   this.author = author;
@@ -20,6 +22,22 @@ function addBookToLibrary(title, author, pages, status) {
     const cell = card.insertCell();
     cell.textContent = newBook[key];
   }
+
+  let edit = card.insertCell();
+  let button = document.createElement("button");
+  button.textContent = "edit";
+  edit.appendChild(button);
+
+  editIndex++;
+  button.className = "edit-" + editIndex;
+  button.addEventListener("click", () => {
+    console.log(button.className.slice(5));
+    //darken the library with that index
+
+    //fill the form and grab focus there
+
+    //rewrite the library with the data
+  });
 }
 
 newButton.addEventListener("click", () => {
