@@ -12,6 +12,7 @@ const Library = [];
 
 let editIndex = -1;
 let editFocus = false;
+let currentIndex;
 
 function Book(title, author, pages, status) {
   this.title = title;
@@ -41,6 +42,7 @@ function addBookToLibrary(title, author, pages, status) {
   button.addEventListener("click", () => {
     if (editFocus) {
       editFocus = false;
+      currentIndex = undefined;
       card.style.filter = "brightness(100%)";
       card.style.border = "none";
       form.reset();
@@ -53,7 +55,7 @@ function addBookToLibrary(title, author, pages, status) {
     card.style.border = "solid blue";
 
     //fill the form and grab focus there
-    const currentIndex = button.className.slice(5);
+    currentIndex = button.className.slice(5);
     formTitle.value = Library[currentIndex].title;
     formAuthor.value = Library[currentIndex].author;
     formPages.value = Library[currentIndex].pages;
@@ -63,7 +65,7 @@ function addBookToLibrary(title, author, pages, status) {
   });
 }
 
-newButton.addEventListener("click", () => {
+function submitBook(index) {
   const title = formTitle.value;
   let author = formAuthor.value;
   let pages = formPages.value;
@@ -78,9 +80,16 @@ newButton.addEventListener("click", () => {
   if (author.length == 0) author = "-";
   if (pages.length == 0) pages = "-";
 
+  if (editFocus) {
+    editFocus = false;
+    console.log("delete library with index " + currentIndex);
+  }
+
   addBookToLibrary(title, author, pages, status);
   form.reset();
-});
+}
+
+newButton.addEventListener("click", submitBook);
 
 // sample book
 addBookToLibrary("Harry Potter", "JKR", "200", "Completed");
