@@ -1,9 +1,17 @@
 const container = document.getElementById("container");
 const newButton = document.getElementById("new");
 const warning = document.getElementById("warning");
+
+const form = document.querySelector("form");
+const formTitle = document.getElementById("title");
+const formAuthor = document.getElementById("author");
+const formPages = document.getElementById("pages");
+const formStatus = document.getElementById("status");
+
 const Library = [];
 
 let editIndex = -1;
+let editFocus = false;
 
 function Book(title, author, pages, status) {
   this.title = title;
@@ -31,20 +39,35 @@ function addBookToLibrary(title, author, pages, status) {
   editIndex++;
   button.className = "edit-" + editIndex;
   button.addEventListener("click", () => {
-    console.log(button.className.slice(5));
+    if (editFocus) {
+      editFocus = false;
+      card.style.filter = "brightness(100%)";
+      card.style.border = "none";
+      form.reset();
+      return;
+    }
+
+    editFocus = true;
     //darken the library with that index
+    card.style.filter = "brightness(80%)";
+    card.style.border = "solid blue";
 
     //fill the form and grab focus there
+    const currentIndex = button.className.slice(5);
+    formTitle.value = Library[currentIndex].title;
+    formAuthor.value = Library[currentIndex].author;
+    formPages.value = Library[currentIndex].pages;
+    formStatus.value = Library[currentIndex].status;
 
     //rewrite the library with the data
   });
 }
 
 newButton.addEventListener("click", () => {
-  const title = document.getElementById("title").value;
-  let author = document.getElementById("author").value;
-  let pages = document.getElementById("pages").value;
-  const status = document.getElementById("status").value;
+  const title = formTitle.value;
+  let author = formAuthor.value;
+  let pages = formPages.value;
+  const status = formStatus.value;
 
   if (title.length == 0) {
     warning.style.display = "block";
@@ -56,7 +79,7 @@ newButton.addEventListener("click", () => {
   if (pages.length == 0) pages = "-";
 
   addBookToLibrary(title, author, pages, status);
-  document.querySelector("form").reset();
+  form.reset();
 });
 
 // sample book
