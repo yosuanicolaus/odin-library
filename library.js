@@ -20,16 +20,17 @@ function Book(title, author, pages, status) {
   this.status = status;
 }
 
-function resetDisplay() {
-  for (let i = 0; i < Library.length; i++) {
+function resetDisplay(length) {
+  if (length == undefined) length = 0;
+  for (let i = 0; i < Library.length + length; i++) {
     const card = document.getElementsByClassName("card");
     if (card[0] == undefined) break;
     card[0].remove();
   }
 }
 
-function displayLibrary() {
-  resetDisplay();
+function displayLibrary(length) {
+  resetDisplay(length);
 
   for (let i = 0; i < Library.length; i++) {
     const card = container.insertRow();
@@ -40,6 +41,7 @@ function displayLibrary() {
     }
     card.insertCell();
     addEdit(card, i);
+    addDelete(card, i);
   }
 }
 
@@ -65,6 +67,17 @@ function addEdit(card, index) {
     formAuthor.value = Library[index].author;
     formPages.value = Library[index].pages;
     formStatus.value = Library[index].status;
+  });
+}
+
+function addDelete(card, index) {
+  const button = document.createElement("button");
+  button.textContent = "delete";
+  card.lastChild.appendChild(button);
+
+  button.addEventListener("click", () => {
+    Library.splice(index, 1);
+    displayLibrary(1);
   });
 }
 
