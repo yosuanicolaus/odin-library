@@ -10,10 +10,8 @@ const formStatus = document.getElementById("status");
 
 const Library = [];
 
-let editIndex = -1;
 let editFocus = false;
 let currentIndex;
-let tr = document.querySelector("tr");
 
 function Book(title, author, pages, status) {
   this.title = title;
@@ -31,7 +29,7 @@ function resetDisplay() {
 }
 
 function displayLibrary() {
-  resetDisplay(); 
+  resetDisplay();
 
   for (let i = 0; i < Library.length; i++) {
     const card = container.insertRow();
@@ -47,13 +45,11 @@ function displayLibrary() {
 
 function addEdit(card, index) {
   const button = document.createElement("button");
-  // editIndex++;
   button.textContent = "edit";
   button.className = "edit-" + index;
   card.lastChild.appendChild(button);
 
   button.addEventListener("click", () => {
-    console.log("helloooo");
     if (editFocus) {
       editFocus = false;
       styleFocus(editFocus, currentIndex);
@@ -72,13 +68,6 @@ function addEdit(card, index) {
   });
 }
 
-function addBookToLibrary(title, author, pages, status) {
-  const newBook = new Book(title, author, pages, status);
-  Library.push(newBook);
-
-  displayLibrary();
-}
-
 function styleFocus(isInFocus, index) {
   const card = document.getElementsByClassName("card")[index];
   if (isInFocus) {
@@ -88,6 +77,15 @@ function styleFocus(isInFocus, index) {
     card.style.filter = "brightness(100%)";
     card.style.border = "none";
   }
+}
+
+function addBookToLibrary(title, author, pages, status, index, remove) {
+  const newBook = new Book(title, author, pages, status);
+  if (index == undefined) index = Library.length;
+  if (remove == undefined) remove = 0;
+  Library.splice(index, remove, newBook);
+
+  displayLibrary();
 }
 
 function submitBook() {
@@ -107,15 +105,12 @@ function submitBook() {
 
   if (editFocus) {
     editFocus = false;
-    console.log("delete library with index " + currentIndex);
     styleFocus(editFocus, currentIndex);
-    Library.splice(currentIndex, 1, new Book(title, author, pages, status));
-    displayLibrary();
-    form.reset();
-    return;
+    addBookToLibrary(title, author, pages, status, currentIndex, 1);
+  } else {
+    addBookToLibrary(title, author, pages, status);
   }
 
-  addBookToLibrary(title, author, pages, status);
   form.reset();
 }
 
