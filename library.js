@@ -13,7 +13,6 @@ const Library = [];
 let editIndex = -1;
 let editFocus = false;
 let currentIndex;
-let resetIndex = 0;
 let tr = document.querySelector("tr");
 
 function Book(title, author, pages, status) {
@@ -23,17 +22,17 @@ function Book(title, author, pages, status) {
   this.status = status;
 }
 
-function displayLibrary() {
-  //reset display to 0
-  for (let i = 0; i < resetIndex; i++) {
-    tr = tr.nextElementSibling;
-    for (let i = 0; i < 5; i++) {
-      tr.deleteCell(0);
-    }
+function resetDisplay() {
+  for (let i = 0; i < Library.length; i++) {
+    const card = document.getElementsByClassName("card");
+    if (card[0] == undefined) break;
+    card[0].remove();
   }
-  resetIndex++;
+}
 
-  //then fill the display with new Library entry
+function displayLibrary() {
+  resetDisplay(); 
+
   for (let i = 0; i < Library.length; i++) {
     const card = container.insertRow();
     card.className = "card";
@@ -42,16 +41,15 @@ function displayLibrary() {
       cell.textContent = Library[i][key];
     }
     card.insertCell();
-    addEdit(card);
+    addEdit(card, i);
   }
 }
 
-function addEdit(rowCard) {
-  const card = rowCard;
+function addEdit(card, index) {
   const button = document.createElement("button");
-  editIndex++;
+  // editIndex++;
   button.textContent = "edit";
-  button.className = "edit-" + editIndex;
+  button.className = "edit-" + index;
   card.lastChild.appendChild(button);
 
   button.addEventListener("click", () => {
@@ -64,35 +62,14 @@ function addEdit(rowCard) {
     }
 
     editFocus = true;
-    currentIndex = button.className.slice(5);
-    styleFocus(editFocus, currentIndex);
+    currentIndex = index;
+    styleFocus(editFocus, index);
 
-    formTitle.value = Library[currentIndex].title;
-    formAuthor.value = Library[currentIndex].author;
-    formPages.value = Library[currentIndex].pages;
-    formStatus.value = Library[currentIndex].status;
+    formTitle.value = Library[index].title;
+    formAuthor.value = Library[index].author;
+    formPages.value = Library[index].pages;
+    formStatus.value = Library[index].status;
   });
-}
-
-function editLibrary(button) {
-  if (editFocus) {
-    editFocus = false;
-    styleFocus(editFocus, currentIndex);
-    currentIndex = undefined;
-    form.reset();
-    return;
-  }
-
-  editFocus = true;
-  currentIndex = button.className.slice(5);
-  styleFocus(editFocus, currentIndex);
-
-  formTitle.value = Library[currentIndex].title;
-  formAuthor.value = Library[currentIndex].author;
-  formPages.value = Library[currentIndex].pages;
-  formStatus.value = Library[currentIndex].status;
-
-  //rewrite the library with the data
 }
 
 function addBookToLibrary(title, author, pages, status) {
@@ -113,7 +90,7 @@ function styleFocus(isInFocus, index) {
   }
 }
 
-function submitBook(index) {
+function submitBook() {
   const title = formTitle.value;
   let author = formAuthor.value;
   let pages = formPages.value;
@@ -132,7 +109,10 @@ function submitBook(index) {
     editFocus = false;
     console.log("delete library with index " + currentIndex);
     styleFocus(editFocus, currentIndex);
-    container.deleteRow(currentIndex);
+    Library.splice(currentIndex, 1, new Book(title, author, pages, status));
+    displayLibrary();
+    form.reset();
+    return;
   }
 
   addBookToLibrary(title, author, pages, status);
