@@ -20,8 +20,7 @@ function Book(title, author, pages, status) {
   this.status = status;
 }
 
-function resetDisplay(length) {
-  if (length == undefined) length = 0;
+function resetDisplay(length = 0) {
   for (let i = 0; i < Library.length + length; i++) {
     const card = document.getElementsByClassName("card");
     if (card[0] == undefined) break;
@@ -92,12 +91,16 @@ function styleFocus(isInFocus, index) {
   }
 }
 
-function addBookToLibrary(title, author, pages, status, index, remove) {
+function addBookToLibrary(
+  title,
+  author,
+  pages,
+  status,
+  index = Library.length,
+  remove = 0
+) {
   const newBook = new Book(title, author, pages, status);
-  if (index == undefined) index = Library.length;
-  if (remove == undefined) remove = 0;
   Library.splice(index, remove, newBook);
-
   displayLibrary();
 }
 
